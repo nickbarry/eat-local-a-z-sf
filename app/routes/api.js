@@ -8,16 +8,6 @@ module.exports = function(app, express) {
             restaurants.getRestaurants(req, res);
         });
 
-    // apiRouter.route('/restaurants/:restaurant_id')
-    //         .get(function(req,res){
-    //             restaurants.getIndividualRestaurant(req,res);
-    //         });
-
-    // apiRouter.route('/modify')
-    //     .post(function(req, res) {
-    //         users.recordHistory(req, res);
-    //     });
-
     apiRouter.route('/users/:user_id')
         .get(function(req,res){
              users.showHistory(req,res);

@@ -26,17 +26,6 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/index.html'));
 });
 
-
-// var db= 'mongodb://'+process.env.IP+'/mydb';
-// mongoose.connect(db,function(err,res){
-//   if(err){
-//     console.log('error connect to db.');
-//     console.log(err);
-//   } else {
-//     console.log('connected to db.');
-//   }
-// });
-
 mongoose.connect(process.env.MONGOLAB_URI, function(err, res) {
   if (err) {
     console.log(console.log('Error connecting to the database. ' + process.env.MONGOLAB_URI));

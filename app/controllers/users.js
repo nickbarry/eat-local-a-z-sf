@@ -3,10 +3,7 @@ var User = require("../models/user");
 module.exports = {
     recordHistory: function(req, res) {
         var self = this;
-        var userId = req.params.userId;
-        // var restaurant = req.body.restaurant;
-        // var cuisine = req.body.cuisine;
-        // var letter = req.body.letter;
+        var userId = req.params.user_id;
 
         User.findOne({
             fbUserId: userId
@@ -21,11 +18,10 @@ module.exports = {
                     if (err) return res.status(500).json({
                         error: err
                     });
-                    res.status(200);
+                    return res.status(200);
                 });
             }
             else {
-
                 self.recordInfo(user, req.body)
                     .then(function(user) {
                         return res.json(user);
@@ -35,7 +31,6 @@ module.exports = {
                             error: err
                         });
                     });
-
             }
         });
 
@@ -51,7 +46,6 @@ module.exports = {
         return user;
     },
     showHistory: function(req, res) {
-        console.log('im in showHistory');
         var self = this;
         var userId = req.params.user_id;
 
@@ -63,7 +57,6 @@ module.exports = {
                 error: err
             });
             if (!user) {
-                console.log('this user doesnt exist');
                 var userObj = self.createUser(userId);
                 var newUser = new User(userObj);
                 newUser.save(function(err, user) {
@@ -74,7 +67,6 @@ module.exports = {
                         letters: allLetters
                     });
                 });
-
             }
             else {
                 var newLetters = self.findNewLetters(user, allLetters);
@@ -87,7 +79,6 @@ module.exports = {
         var newLetters = allLetters.filter(function(letter) {
             return lettersDone.indexOf(letter) === -1;
         });
-        console.log('newLetters inside finNewL');
         return newLetters;
     },
     recordInfo: function(user, body) {
@@ -101,7 +92,6 @@ module.exports = {
             if (user.lettersDone.indexOf(body.letter) === -1) {
                 user.lettersDone.push(body.letter);
             }
-
             user.save(function(err, user) {
                 if (err) {
                     reject(err);
@@ -111,20 +101,5 @@ module.exports = {
                 }
             });
         });
-
-        // if (user.cuisinesDone.indexOf(body.cuisine) === -1) {
-        //     user.cuisinesDone.push(body.cuisine);
-        // }
-        // if (user.restaurantsDone.indexOf(body.restaurant) === -1) {
-        //     user.restaurantsDone.push(body.restaurant);
-        // }
-        // if (user.lettersDone.indexOf(body.letter) === -1) {
-        //     user.lettersDone.push(body.letter);
-        // }
-        // user.save(function(err, user) {
-        //     if(err)
-        //     // if (err)return res.status(500).json({error:err});
-        //     // res.status(200);
-        // });
     }
 };

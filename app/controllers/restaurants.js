@@ -35,22 +35,6 @@ module.exports = {
                     error: err
                 });
             });
-    }, 
-    getIndividualRestaurant: function(req, res) {
-        // var restaurantId = req.params.restaurant_id;
-
-        // // See http://www.yelp.com/developers/documentation/v2/business
-        // yelp.business(restaurantId)
-        //     .then(function(data) {
-        //         console.log(data);
-        //         res.json(data);
-        //     })
-        //     .catch(function(err) {
-        //         console.log(err);
-        //         res.status(500).json({
-        //             error: err
-        //         })
-        //     });
     },
     modifyResponse: function(data){
         var newData;
