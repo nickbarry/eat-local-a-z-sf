@@ -22,6 +22,10 @@ app.use(express.static(__dirname + '/client'));
 var apiRoutes = require("./app/routes/api")(app, express);
 app.use('/api', apiRoutes);
 
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/client/index.html'));
+});
+
 
 // var db= 'mongodb://'+process.env.IP+'/mydb';
 // mongoose.connect(db,function(err,res){
