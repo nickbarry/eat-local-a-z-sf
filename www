@@ -1,0 +1,10 @@
+#!/bin/env node
+var http = require("http");
+var app = require('./server');
+var server = http.createServer(app);
+
+
+var port= process.env.PORT || 3000;
+server.listen(port, function() {
+   console.log("Server listening on "+port);
+});
