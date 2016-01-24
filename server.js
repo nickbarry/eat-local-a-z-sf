@@ -22,18 +22,22 @@ app.use(express.static(__dirname + '/client'));
 var apiRoutes = require("./app/routes/api")(app, express);
 app.use('/api', apiRoutes);
 
-// mongoose.connect('mongodb://' + port);
-// mongoose.connection.on('open', function(){
-//   console.log('Mongoose connected.');
+
+// var db= 'mongodb://'+process.env.IP+'/mydb';
+// mongoose.connect(db,function(err,res){
+//   if(err){
+//     console.log('error connect to db.');
+//     console.log(err);
+//   } else {
+//     console.log('connected to db.');
+//   }
 // });
 
-var db= 'mongodb://'+process.env.IP+'/mydb';
-mongoose.connect(db,function(err,res){
-  if(err){
-    console.log('error connect to db.');
-    console.log(err);
+mongoose.connect(process.env.MONGOLAB_URI, function(err, res) {
+  if (err) {
+    console.log(console.log('Error connecting to the database. ' + process.env.MONGOLAB_URI));
   } else {
-    console.log('connected to db.');
+    console.log('Connected to Database: ' + process.env.MONGOLAB_URI);
   }
 });
 
